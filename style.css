@@ -126,6 +126,23 @@ html, body {
     border-radius: 4px;
 }
 
+#submit-button{
+    background-color: blue;
+    border: none;
+    color: white;
+    padding: 5px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    margin: auto 20px auto auto;
+    cursor: pointer;
+    transition-duration: 0.4s;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    border-radius: 4px;
+
+    display: none;
+}
+
 #start-button:active{
     background-color: darkblue;
 }
