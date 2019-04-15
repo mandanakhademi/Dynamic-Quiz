@@ -27,7 +27,7 @@ initialize = function() {
       score: 10
     }];
     
-    let answers = [];
+    let answers = [0,0,0,0,0];
     let i = 1;
     showQuestion(questions, i);
 
@@ -35,7 +35,7 @@ initialize = function() {
     nextButton.addEventListener("click", eventListenerNext.bind(null, event, questions, answers)); 
 
     let previousButton = document.getElementById('previous-button');
-    previousButton.addEventListener("click", eventListenerPrevious.bind(null, event, questions)); 
+    previousButton.addEventListener("click", eventListenerPrevious.bind(null, event, questions, answers)); 
 
     let startButton = document.getElementById('start-button');
     startButton.addEventListener("click", eventListenerStart.bind(null, event, questions)); 
@@ -56,30 +56,33 @@ showQuestion = function(questions, i){
 }
 
 setRadioButtons = function(questions, i){
-    for (j=0; j<document.getElementsByTagName('input').length; j++) 
-  {
-    if(document.getElementsByTagName('input')[j].type=='radio')
-    {
-        let radio = document.getElementsByTagName('input')[j];
-        radio.nextSibling.data = questions[i-1].options[j];
-        document.getElementsByTagName('input')[j].checked = false;
-        radio.addEventListener("click", eventListenerSetAnswer);
-        
-    }
-  }
+    for (j=0; j<document.getElementsByTagName('input').length; j++) {
+
+        if(document.getElementsByTagName('input')[j].type=='radio'){
+
+            let radio = document.getElementsByTagName('input')[j];
+            radio.nextSibling.data = questions[i-1].options[j];
+            document.getElementsByTagName('input')[j].checked = false;
+            radio.addEventListener("click", eventListenerSetAnswer);
+
+        }   
+
+    }     
+  
 }
 
 eventListenerSetAnswer = function(event){
     let target = event.target;    
-    target.parentElement.value = target.nextSibling.data;
+    target.parentElement.value = target.value;
 }
 
 eventListenerNext = function(event, questions, answers){    
     let questionForm = document.getElementsByClassName('form');
     let questionAnswer = questionForm[0].value;
     
-    let currentNumber = document.getElementById('question-number');
-    questionNumber = parseInt(currentNumber.innerText) + 1;
+    let currentNumberElement = document.getElementById('question-number');
+    let currentNumber = parseInt(currentNumberElement.innerText);
+    questionNumber = currentNumber + 1;
     
     if (questionNumber <= questions.length){
         showQuestion(questions, questionNumber);    
@@ -90,6 +93,9 @@ eventListenerNext = function(event, questions, answers){
 
     answers[currentNumber-1] = questionAnswer;
 
+    setAnswer(answers, questionNumber);
+    
+
     if (questionNumber == questions.length){
         displayButton('submit-button');
         hideButton('next-button');        
@@ -97,13 +103,16 @@ eventListenerNext = function(event, questions, answers){
 }
 
 
-eventListenerPrevious = function(event, questions){
-    let currentNumber = document.getElementById('question-number');
-    questionNumber = parseInt(currentNumber.innerText) - 1;
+eventListenerPrevious = function(event, questions, answers){
+    let currentNumberElement = document.getElementById('question-number');
+    let currentNumber = parseInt(currentNumberElement.innerText);
+    questionNumber = currentNumber - 1;
 
     if (questionNumber >= 1){
         showQuestion(questions, questionNumber);                 
     }
+
+    setAnswer(answers, questionNumber);
 
     if (questionNumber == 1){
         hideButton('start-button');
@@ -141,6 +150,19 @@ hideButton = function(buttonId){
         }
 }
 
+setAnswer = function(answers, questionNumber){
+    for (k=0; k<document.getElementsByTagName('input').length; k++) {  
+
+        if(document.getElementsByTagName('input')[k].type=='radio'){
+
+            let radio = document.getElementsByTagName('input')[k]; 
+
+            if(k+1 == answers[questionNumber-1]){
+                document.getElementsByTagName('input')[k].checked = true;
+            }
+        }          
+    }  
+}
 
 
 window.onload = initialize;
