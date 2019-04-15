@@ -1,0 +1,130 @@
+html, body {
+    height: 100% !important;
+    width: 100%;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    border: 2px solid black;
+
+}
+
+.header{
+    flex: 1;
+    display: flex;
+    width: 100%;
+    background-color: lightblue;
+    border-bottom: 2px solid black;
+}
+
+.header h1{
+    color: black;
+    margin: auto;
+}
+
+.content{
+    background-color: lightblue;
+    flex: 4;
+    width: 100%;
+    height: 0;
+}
+
+.question-view{
+    width: 100%;
+    height: 100%;
+    margin: 50px;
+    align-content: center;
+}
+
+#question-number{
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.question{
+    font-size: 20px;
+    margin-bottom: 10px;
+
+}
+
+.result-view{
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    align-content: center;
+    font-size: 32px;
+}
+
+.footer{
+    flex: 1;
+    display: flex;
+    width: 100%;
+    background-color: lightblue;
+    border-top: 2px solid black;
+}
+
+#start-button{
+    background-color: blue;
+    border: none;
+    color: white;
+    padding: 5px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    margin: auto 60% auto auto;
+    
+    cursor: pointer;
+    transition-duration: 0.4s;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    border-radius: 4px;
+}
+
+#previous-button{
+    background-color: blue;
+    border: none;
+    color: white;
+    padding: 5px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 50px;
+    cursor: pointer;
+    transition-duration: 0.4s;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    border-radius: 4px;
+}
+
+#next-button{
+    background-color: blue;
+    border: none;
+    color: white;
+    padding: 5px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 50px;
+    cursor: pointer;
+    transition-duration: 0.4s;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    border-radius: 4px;
+}
+
+#start-button:active{
+    background-color: darkblue;
+}
+
+#previous:active{
+    background-color: darkblue;
+}
+
+#next:active{
+    background-color: darkblue;
+}
+
+
+.hide{
+    display: none !important;
+}
+
