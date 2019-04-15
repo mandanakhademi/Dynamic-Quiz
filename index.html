@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Dynamic-Quiz</title>
+
+
+</head>
+<body>
+
+    <div class="container">
+
+        <div class="header">
+            <h1>Dynamic-Quiz</h1>
+        </div>
+            
+        <div class="content"> 
+		
+			<div class="question-view">
+                <div id="question-number"></div>
+                <div class="question"></div>
+                                
+                <form action="/action_page.php">
+                    <input type="radio" name="answer" value="option1"> <br>
+                    <input type="radio" name="answer" value="option2"> <br>
+                    <input type="radio" name="answer" value="option3"> <br>
+                    <input type="radio" name="answer" value="option4"> <br>    
+                </form>
+
+            </div>
+             
+			<div class="result-view hide">
+                <div>Your Score is:</div>
+                <div id="result"></div>	                
+			</div>             		
+		
+        </div>            
+        
+        <div class="footer">
+            <button id="start-button">Start</button>
+
+			<button id="previous-button">Previous</button>
+            <button id="next-button">Next</button>
+
+        </div>
+		
+    </div>
+    
+</body>
+</html>
