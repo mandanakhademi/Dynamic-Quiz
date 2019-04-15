@@ -32,12 +32,14 @@ initialize = function() {
     showQuestion(questions, i);
 
     let nextButton = document.getElementById('next-button');
-
     nextButton.addEventListener("click", eventListenerNext.bind(null, event, questions, answers)); 
-    
-    let previousButton = document.getElementById('previous-button');
 
+    let previousButton = document.getElementById('previous-button');
     previousButton.addEventListener("click", eventListenerPrevious.bind(null, event, questions)); 
+
+    let startButton = document.getElementById('start-button');
+    startButton.addEventListener("click", eventListenerStart.bind(null, event, questions)); 
+    
 
 }
 
@@ -170,7 +172,13 @@ displayNextButton = function(){
         }
 }
 
-
+eventListenerStart = function(event, questions){
+    showQuestion(questions, 1);  
+    hidePreviousButton();  
+    hideStartButton();
+    hideSubmitButton();
+    displayNextButton();
+}
 
 
 window.onload = initialize;
