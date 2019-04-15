@@ -83,46 +83,19 @@ eventListenerNext = function(event, questions, answers){
     
     if (questionNumber <= questions.length){
         showQuestion(questions, questionNumber);    
-        displayStartButton();
-        displayPreviousButton();        
+
+        displayButton('start-button');
+        displayButton('previous-button');
     }
 
     answers[currentNumber-1] = questionAnswer;
 
     if (questionNumber == questions.length){
-        displaySubmitButton();
-        hideNextButton();
+        displayButton('submit-button');
+        hideButton('next-button');        
     }
 }
 
-
-displayStartButton = function(){
-    let startButton = document.getElementById('start-button');
-        if(startButton.classList.contains('hide')){
-            startButton.classList.remove('hide'); 
-        }
-}
-
-displayPreviousButton = function(){
-    let previousButton = document.getElementById('previous-button');
-        if(previousButton.classList.contains('hide')){
-            previousButton.classList.remove('hide'); 
-        }
-}
-
-displaySubmitButton = function(){
-    let submitButton = document.getElementById('submit-button');
-        if(submitButton.classList.contains('hide')){
-            submitButton.classList.remove('hide'); 
-        }
-}
-
-hideNextButton = function(){
-    let nextButton = document.getElementById('next-button');
-        if(!nextButton.classList.contains('hide')){
-            nextButton.classList.add('hide'); 
-        }
-}
 
 eventListenerPrevious = function(event, questions){
     let currentNumber = document.getElementById('question-number');
@@ -133,43 +106,17 @@ eventListenerPrevious = function(event, questions){
     }
 
     if (questionNumber == 1){
-        hideStartButton()
-        hidePreviousButton();  
+        hideButton('start-button');
+        hideButton('previous-button');
+
     }
 
     if (questionNumber == questions.length-1){
-        hideSubmitButton();
-        displayNextButton();
+        hideButton('submit-button');
+        displayButton('next-button');
+
     }    
 
-}
-
-hideStartButton = function(){
-    let startButton = document.getElementById('start-button');
-        if(!startButton.classList.contains('hide')){
-            startButton.classList.add('hide'); 
-        }
-}
-
-hidePreviousButton = function(){
-    let previousButton = document.getElementById('previous-button');
-        if(!previousButton.classList.contains('hide')){
-            previousButton.classList.add('hide'); 
-        }
-}
-
-hideSubmitButton = function(){
-    let submitButton = document.getElementById('submit-button');
-        if(!submitButton.classList.contains('hide')){
-            submitButton.classList.add('hide'); 
-        }
-}
-
-displayNextButton = function(){
-    let nextButton = document.getElementById('next-button');
-        if(nextButton.classList.contains('hide')){
-            nextButton.classList.remove('hide'); 
-        }
 }
 
 eventListenerStart = function(event, questions){
@@ -179,6 +126,21 @@ eventListenerStart = function(event, questions){
     hideSubmitButton();
     displayNextButton();
 }
+
+displayButton = function(buttonId){
+    let button = document.getElementById(buttonId);
+        if(button.classList.contains('hide')){
+            button.classList.remove('hide'); 
+        }
+}
+
+hideButton = function(buttonId){
+    let button = document.getElementById(buttonId);
+        if(!button.classList.contains('hide')){
+            button.classList.add('hide'); 
+        }
+}
+
 
 
 window.onload = initialize;
