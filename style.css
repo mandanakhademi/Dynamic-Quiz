@@ -84,14 +84,13 @@ html, body {
     text-align: center;
     text-decoration: none;
     font-size: 16px;
-    margin: auto;
+    margin: auto 10px auto auto;
     
     cursor: pointer;
     transition-duration: 0.4s;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
     border-radius: 4px;
 
-    display: none;
 }
 
 #previous-button{
@@ -102,13 +101,12 @@ html, body {
     text-align: center;
     text-decoration: none;
     font-size: 16px;
-    margin: auto;
+    margin: auto auto auto 10px;
     cursor: pointer;
     transition-duration: 0.4s;
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
     border-radius: 4px;
 
-    display: none;
 }
 
 #next-button{
@@ -140,7 +138,6 @@ html, body {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
     border-radius: 4px;
 
-    display: none;
 }
 
 #start-button:active{
