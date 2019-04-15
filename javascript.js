@@ -40,6 +40,8 @@ initialize = function() {
     let startButton = document.getElementById('start-button');
     startButton.addEventListener("click", eventListenerStart.bind(null, event, questions, answers)); 
 
+    let submitButton = document.getElementById('submit-button');
+    submitButton.addEventListener("click", eventListenerSubmit.bind(null, event, questions, answers));     
 
 }
 
@@ -184,6 +186,43 @@ eventListenerStart = function(event, questions, answers){
     displayButton('next-button');
 }
 
+eventListenerSubmit = function(event, questions, answers){    
+    let questionAnswer = 0;
+
+    let inputs = document.getElementsByTagName('input');
+
+    for (k=0; k<inputs.length; k++) {  
+
+        if(inputs[k].type=='radio'){
+
+            let radio = inputs[k];
+            if (radio.checked == true){
+                questionAnswer = k+1;
+            }
+        }
+    }
+    
+    let currentNumberElement = document.getElementById('question-number');
+    let currentNumber = parseInt(currentNumberElement.innerText);
+    
+    answers[currentNumber-1] = questionAnswer;
+
+
+    hideButton('submit-button');        
+    hideButton('previous-button');      
+    
+    let questionView = document.getElementsByClassName('question-view');
+    let resultView = document.getElementsByClassName('result-view');
+    resultView[0].classList.remove('hide'); 
+    questionView[0].classList.add('hide');     
+
+    let result = getResult(questions, answers);  
+    let resultDiv = document.getElementById("result");
+    resultDiv.innerText = result[0]+" ---- you answered "+ result[1]+"/"+questions.length;
+    
+}
+
+
 displayButton = function(buttonId){
     let button = document.getElementById(buttonId);
         if(button.classList.contains('hide')){
@@ -210,6 +249,20 @@ setAnswer = function(answers, questionNumber){
             }
         }          
     }  
+}
+
+getResult = function(questions, answers){
+    let score = 0;
+    let correctAnswers = 0;
+    for(i=0; i<questions.length; i++){
+        if(questions[i].correctAnswer == answers[i]-1){
+            correctAnswers += 1;
+
+            score += questions[i].score;
+        }
+
+    }
+    return [score, correctAnswers];
 }
 
 
