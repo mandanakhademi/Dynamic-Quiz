@@ -33,7 +33,11 @@ initialize = function() {
 
     let nextButton = document.getElementById('next-button');
 
-    nextButton.addEventListener("click", eventListenerNext.bind(null, event, questions, answers));    
+    nextButton.addEventListener("click", eventListenerNext.bind(null, event, questions, answers)); 
+    
+    let previousButton = document.getElementById('previous-button');
+
+    previousButton.addEventListener("click", eventListenerPrevious.bind(null, event, questions)); 
 
 }
 
@@ -118,6 +122,53 @@ hideNextButton = function(){
         }
 }
 
+eventListenerPrevious = function(event, questions){
+    let currentNumber = document.getElementById('question-number');
+    questionNumber = parseInt(currentNumber.innerText) - 1;
+
+    if (questionNumber >= 1){
+        showQuestion(questions, questionNumber);                 
+    }
+
+    if (questionNumber == 1){
+        hideStartButton()
+        hidePreviousButton();  
+    }
+
+    if (questionNumber == questions.length-1){
+        hideSubmitButton();
+        displayNextButton();
+    }    
+
+}
+
+hideStartButton = function(){
+    let startButton = document.getElementById('start-button');
+        if(!startButton.classList.contains('hide')){
+            startButton.classList.add('hide'); 
+        }
+}
+
+hidePreviousButton = function(){
+    let previousButton = document.getElementById('previous-button');
+        if(!previousButton.classList.contains('hide')){
+            previousButton.classList.add('hide'); 
+        }
+}
+
+hideSubmitButton = function(){
+    let submitButton = document.getElementById('submit-button');
+        if(!submitButton.classList.contains('hide')){
+            submitButton.classList.add('hide'); 
+        }
+}
+
+displayNextButton = function(){
+    let nextButton = document.getElementById('next-button');
+        if(nextButton.classList.contains('hide')){
+            nextButton.classList.remove('hide'); 
+        }
+}
 
 
 
