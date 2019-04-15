@@ -27,15 +27,20 @@ initialize = function() {
       score: 10
     }];
     
+    let answers = [];
     let i = 1;
     showQuestion(questions, i);
+
+    let nextButton = document.getElementById('next-button');
+
+    nextButton.addEventListener("click", eventListenerNext.bind(null, event, questions, answers));    
 
 }
 
 showQuestion = function(questions, i){
 
     let questionNumber = document.getElementById('question-number');
-    questionNumber.innerText = "Question"+i;
+    questionNumber.innerText = i;
 
     let questionDiv = document.getElementsByClassName('question');
     questionDiv[0].innerText = questions[i-1].question;
@@ -51,21 +56,69 @@ setRadioButtons = function(questions, i){
     {
         let radio = document.getElementsByTagName('input')[j];
         radio.nextSibling.data = questions[i-1].options[j];
+        document.getElementsByTagName('input')[j].checked = false;
         radio.addEventListener("click", eventListenerSetAnswer);
-
         
     }
   }
 }
 
 eventListenerSetAnswer = function(event){
-    let target = event.target;
-    
-    console.log(target.parentElement);
+    let target = event.target;    
     target.parentElement.value = target.nextSibling.data;
-    console.log(target.parentElement.value);
-
 }
+
+eventListenerNext = function(event, questions, answers){    
+    let questionForm = document.getElementsByClassName('form');
+    let questionAnswer = questionForm[0].value;
+    
+    let currentNumber = document.getElementById('question-number');
+    questionNumber = parseInt(currentNumber.innerText) + 1;
+    
+    if (questionNumber <= questions.length){
+        showQuestion(questions, questionNumber);    
+        displayStartButton();
+        displayPreviousButton();        
+    }
+
+    answers[currentNumber-1] = questionAnswer;
+
+    if (questionNumber == questions.length){
+        displaySubmitButton();
+        hideNextButton();
+    }
+}
+
+
+displayStartButton = function(){
+    let startButton = document.getElementById('start-button');
+        if(startButton.classList.contains('hide')){
+            startButton.classList.remove('hide'); 
+        }
+}
+
+displayPreviousButton = function(){
+    let previousButton = document.getElementById('previous-button');
+        if(previousButton.classList.contains('hide')){
+            previousButton.classList.remove('hide'); 
+        }
+}
+
+displaySubmitButton = function(){
+    let submitButton = document.getElementById('submit-button');
+        if(submitButton.classList.contains('hide')){
+            submitButton.classList.remove('hide'); 
+        }
+}
+
+hideNextButton = function(){
+    let nextButton = document.getElementById('next-button');
+        if(!nextButton.classList.contains('hide')){
+            nextButton.classList.add('hide'); 
+        }
+}
+
+
 
 
 

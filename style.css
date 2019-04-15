@@ -38,6 +38,11 @@ html, body {
     align-content: center;
 }
 
+.question-view span{
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
 #question-number{
     font-size: 32px;
     margin-bottom: 10px;
