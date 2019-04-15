@@ -38,8 +38,8 @@ initialize = function() {
     previousButton.addEventListener("click", eventListenerPrevious.bind(null, event, questions, answers)); 
 
     let startButton = document.getElementById('start-button');
-    startButton.addEventListener("click", eventListenerStart.bind(null, event, questions)); 
-    
+    startButton.addEventListener("click", eventListenerStart.bind(null, event, questions, answers)); 
+
 
 }
 
@@ -62,7 +62,7 @@ setRadioButtons = function(questions, i){
 
             let radio = document.getElementsByTagName('input')[j];
             radio.nextSibling.data = questions[i-1].options[j];
-            document.getElementsByTagName('input')[j].checked = false;
+            radio.checked = false;
             radio.addEventListener("click", eventListenerSetAnswer);
 
         }   
@@ -77,11 +77,27 @@ eventListenerSetAnswer = function(event){
 }
 
 eventListenerNext = function(event, questions, answers){    
-    let questionForm = document.getElementsByClassName('form');
-    let questionAnswer = questionForm[0].value;
+    // let questionForm = document.getElementsByClassName('form');
+    let questionAnswer = 0;
+
+    let inputs = document.getElementsByTagName('input');
+
+    for (k=0; k<inputs.length; k++) {  
+
+        if(inputs[k].type=='radio'){
+
+            let radio = inputs[k];
+            if (radio.checked == true){
+                questionAnswer = k+1;
+            }
+        }
+    }
     
     let currentNumberElement = document.getElementById('question-number');
     let currentNumber = parseInt(currentNumberElement.innerText);
+
+    answers[currentNumber-1] = questionAnswer;
+
     questionNumber = currentNumber + 1;
     
     if (questionNumber <= questions.length){
@@ -89,13 +105,10 @@ eventListenerNext = function(event, questions, answers){
 
         displayButton('start-button');
         displayButton('previous-button');
-    }
+    }    
 
-    answers[currentNumber-1] = questionAnswer;
-
-    setAnswer(answers, questionNumber);
+    setAnswer(answers,questionNumber);
     
-
     if (questionNumber == questions.length){
         displayButton('submit-button');
         hideButton('next-button');        
@@ -104,8 +117,26 @@ eventListenerNext = function(event, questions, answers){
 
 
 eventListenerPrevious = function(event, questions, answers){
+    let questionAnswer = 0;
+
+    let inputs = document.getElementsByTagName('input');
+
+    for (k=0; k<inputs.length; k++) {  
+
+        if(inputs[k].type=='radio'){
+
+            let radio = inputs[k];
+            if (radio.checked == true){
+                questionAnswer = k+1;
+            }
+        }
+    }
+
     let currentNumberElement = document.getElementById('question-number');
     let currentNumber = parseInt(currentNumberElement.innerText);
+
+    answers[currentNumber-1] = questionAnswer;
+
     questionNumber = currentNumber - 1;
 
     if (questionNumber >= 1){
@@ -128,12 +159,29 @@ eventListenerPrevious = function(event, questions, answers){
 
 }
 
-eventListenerStart = function(event, questions){
+eventListenerStart = function(event, questions, answers){
+
+    let questionView = document.getElementsByClassName('question-view');
+    let resultView = document.getElementsByClassName('result-view');
+    if(questionView[0].classList.contains('hide')){
+        questionView[0].classList.remove('hide'); 
+        hideButton('start-button');
+        displayButton('next-button');
+
+    }
+    if(!resultView[0].classList.contains('hide')){
+        resultView[0].classList.add('hide'); 
+        
+    } 
+    for(k=0; k<answers.length; k++){
+        answers[k]=0;
+    }
+    
     showQuestion(questions, 1);  
-    hidePreviousButton();  
-    hideStartButton();
-    hideSubmitButton();
-    displayNextButton();
+    hideButton('previous-button');  
+    hideButton('start-button');
+    hideButton('submit-button');
+    displayButton('next-button');
 }
 
 displayButton = function(buttonId){
@@ -158,7 +206,7 @@ setAnswer = function(answers, questionNumber){
             let radio = document.getElementsByTagName('input')[k]; 
 
             if(k+1 == answers[questionNumber-1]){
-                document.getElementsByTagName('input')[k].checked = true;
+                radio.checked = true;
             }
         }          
     }  
