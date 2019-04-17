@@ -4,4 +4,4 @@ Dynamic quiz
 ## Demo website
 
 Demo website:
- * [Github Pages] (https://mandanakhademi.github.io/Dynamic-Quiz/)
+ * [Github Pages](https://mandanakhademi.github.io/Dynamic-Quiz/)
